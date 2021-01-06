@@ -1,5 +1,6 @@
 import pygame, random
 import constants as cons
+from tile_types.street_tile import Street_tile
 
 # 1600 X 960 surface size = 50 cells by 30
 
@@ -23,7 +24,7 @@ class Map:
     """
     Generates and replaces specific parts of the map_dict to render later as streets
     """
-    def road_building_gen(self):
+    def determine_start_and_end_road(self):
         directions = ['n', 's', 'e', 'w']
         self.starting_node = 0
         self.ending_node = 0
@@ -35,9 +36,9 @@ class Map:
         print("Starting Direction: {}".format(starting_direction))
         print("Ending Direction: {}".format(ending_direction))
 
-        # Assin index of starting_node so that it starts at the choosen direction of the screen
+        # Assign index of starting_node so that it starts at the choosen direction of the screen
         if (starting_direction == "n"):
-            self.starting_node = (random.randint(0, cons.X_GRID_NUM), 0)
+            self.starting_node = (random.randint(0, cons.X_GRID_NUM -1), 0)
         elif (starting_direction == "s"):
             self.starting_node = (random.randint(0, cons.X_GRID_NUM -1), cons.Y_GRID_NUM -1)
         elif (starting_direction == "e"):
@@ -52,36 +53,39 @@ class Map:
         elif (ending_direction == "e"):
             self.ending_node = (cons.X_GRID_NUM -1, random.randint(0, cons.Y_GRID_NUM -1))
         elif (ending_direction == "w"):
-            self.ending_node = (0, random.randint(0, cons.Y_GRID_NUM))
+            self.ending_node = (0, random.randint(0, cons.Y_GRID_NUM -1))
 
         print(self.starting_node)
         print(self.ending_node)
-        print(len(self.map_dict))
-        print(len(self.map_dict[0]))
+        print("self.map_dict x length: {}".format(len(self.map_dict[0]) -1))
+        print("self.map_dict y length: {}".format(len(self.map_dict) -1))
         
         # Assign specific tile to become a starting and ending node
-        target_node = self.map_dict[self.starting_node[0]][self.starting_node[1]]
+        target_node = self.map_dict[self.starting_node[1]][self.starting_node[0]]
         print("Targeted starting node...")
         target_node.starting_node = True
-        print("Target node is now starting node")
+        print("Target node is now road tile starting node")
 
-        target_node = self.map_dict[self.ending_node[0]][self.ending_node[1]]
+        target_node = self.map_dict[self.ending_node[1]][self.ending_node[0]]
         print("Targeted ending node...")
         target_node.ending_node = True
-        print("Target node is now ending node")
+        print("Target node is now road tile ending node")
 
-        # Now create road going to specific direction
+    def render(self, surface):
+        for i in range(len(self.map_dict)):
+            for j in range(len(self.map_dict[i])):
+                if isinstance(j, Street_tile):
+                    j.render(surface)
+
+        print("I render for you, now feed me...")
 
 class Tile:
     """
-    Each tile has a xPos (x position in grid) and yPos (y position in grid),
+    Each tile has a xPos (x position in grid) and yPos (y position in grid),625
     starting_node is if the node is used to start the road at a specific position
     ending_node is if the node is used to end the road at a specific position
     tileType is to differeniate roads, buildings, etc...
     """
-    def __init__(self, xPos, yPos, starting_node=False, ending_node=False, tileType=None):
+    def __init__(self, xPos, yPos):
         self.xPos = xPos
         self.yPos = yPos
-        self.starting_node = starting_node
-        self.ending_node = ending_node
-        self.tileType = tileType

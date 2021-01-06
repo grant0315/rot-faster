@@ -24,7 +24,7 @@ IMAGE CONSTRANTS
 # CLEAR ROAD IMAGES
 PLAYER_IMG = pygame.image.load('assets/player_male.png')
 CLEAR_ROAD_VERT = pygame.image.load('assets/tile042.png')
-CLEAR_ROAD_HORZ = pygame.image.load('assets/tile042.png')
+CLEAR_ROAD_HORI = pygame.image.load('assets/tile042.png')
 CLEAR_ROAD_CROSS_VERT = pygame.image.load('assets/tile044.png')
 CLEAR_ROAD_CROSS_HORZ = pygame.image.load('assets/tile045.png')
 CLEAR_ROAD_END_DOWN = pygame.image.load('assets/tile046.png')

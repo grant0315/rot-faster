@@ -10,9 +10,10 @@ pygame.display.set_caption("RoT FaStEr")
 isRunning = True
 clock = pygame.time.Clock()
 
-# MAP GENERATION STUFFS
+# MAP GENERATION pipSTUFFS
 opening_map = Map(X_GRID_NUM, Y_GRID_NUM)
-opening_map.road_building_gen()
+opening_map.determine_start_and_end_road()
+opening_map.render(rootSurface)
 
 # init sprites object list
 all_sprites_list = pygame.sprite.Group()
