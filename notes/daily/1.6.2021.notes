@@ -1,0 +1,16 @@
+[2021-01-06]
+Notes:
+Ideas:
+--> Maybe look into path generation algorythms
+TODO:
+[!] Fix movement, maybe timer so player can't over turn (I honestly have no idea)
+[√] Create github repo and push what I've got
+[√] Upload the project to github, even if it sucks
+[√] Create prod, dev, and feature branch
+[ ] Actually take time to make a nice readme.md (like it actually matters)
+[ ] Clean up map handling, however the fuck its possible
+[!] Finish render method for tile_types/street_tile.py class
+[!] Fix circular import : ImportError: line 1 in street_tile.py
+[ ] Create a method for movement in player class to clean up main.py
+Activity Log:
+-> Did some stuff
